@@ -1,0 +1,1314 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مدونتي | مصمم ومطور ويب</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts - Tajawal -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <style>
+        :root {
+            --primary-color: #eb1010;
+            --secondary-color: #e70316;
+            --dark-bg: #121212;
+            --text-color: #ffffff;
+            --text-secondary: #b0b0b0;
+            --accent-color: #ff6b6b;
+            --success-color: #4CAF50;
+        }
+        
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-color);
+            overflow-x: hidden;
+            position: relative;
+            
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(235, 16, 16, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(231, 3, 22, 0.1) 0%, transparent 20%);
+            background-attachment: fixed;
+            padding-top: 30px;
+        }
+        
+        .circle {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--primary-color), transparent);
+            filter: blur(60px);
+            z-index: -1;
+            opacity: 0.2;
+        }
+        
+        .circle-1 {
+            width: 400px;
+            height: 400px;
+            top: -100px;
+            right: -100px;
+        }
+        
+        .circle-2 {
+            width: 300px;
+            height: 300px;
+            bottom: 50px;
+            left: -50px;
+        }
+        
+        /* Blog Articles Page */
+        .blog-page {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .blog-article {
+            background: rgba(30, 30, 30, 0.7);
+            border-radius: 10px;
+            padding: 40px;
+            position: relative;
+            margin-bottom: 80px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: none;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+        }
+        
+        .blog-article.active {
+            display: block;
+            animation: fadeIn 0.6s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .blog-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .blog-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 0;
+            background: white;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+        }
+        
+        .blog-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            right: 0;
+            width: 80px;
+            height: 4px;
+          
+            border-radius: 2px;
+        }
+        
+        .blog-date {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .blog-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease;
+        }
+        
+        .blog-image:hover {
+            transform: scale(1.02);
+        }
+        
+        .blog-content {
+            font-size: 1.1rem;
+            
+            margin-bottom: 40px;
+        }
+        
+        .blog-content h3 {
+            color: white;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            position: relative;
+            padding-right: 15px;
+            font-size: 1.5rem;
+        }
+        
+        .blog-content h3:after {
+            content: '';
+            position: absolute;
+            right: 0;
+            bottom: -5px;
+            width: 50px;
+            height: 3px;
+            background: white;
+        }
+        
+        .blog-content ul, .blog-content ol {
+            padding-right: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .blog-content li {
+            margin-bottom: 10px;
+            padding-right: 10px;
+            position: relative;
+        }
+        
+        .blog-content li::before {
+            content: "•";
+            color: white;
+            font-size: 1.3rem;
+            position: absolute;
+            right: -15px;
+            top: 0;
+        }
+        
+        .blog-content strong {
+            color: white;
+        }
+        
+        /* Blog Author */
+        .blog-author {
+            display: flex;
+            align-items: center;
+            margin-top: 40px;
+            padding-top: 25px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .author-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-left: 15px;
+            border: 2px solid var(--primary-color);
+            transition: transform 0.3s ease;
+        }
+        
+        .author-img:hover {
+            transform: scale(1.1);
+        }
+        
+        .author-info h4 {
+            margin-bottom: 5px;
+            color: var(--text-color);
+        }
+        
+        .author-info p {
+            margin: 0;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        /* Blog Navigation */
+        .blog-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin: 40px 0;
+            padding: 20px 0;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .nav-btn {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 77, 77, 0.1);
+            border: 1px solid var(--primary-color);
+            padding: 12px 25px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            color: var(--text-color);
+            text-decoration: none;
+            min-width: 180px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .nav-btn:hover {
+            background: var(--primary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 77, 77, 0.3);
+        }
+        
+        .nav-btn i {
+            margin: 0 8px;
+            transition: transform 0.3s ease;
+        }
+        
+        .nav-btn:hover i {
+            transform: translateX(5px);
+        }
+        
+        .nav-btn .btn-text {
+            flex-grow: 1;
+            text-align: center;
+        }
+        
+        .nav-btn.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        .nav-btn.disabled:hover {
+            background: rgba(255, 255, 255, 0.05);
+            transform: none;
+            box-shadow: none;
+        }
+        
+        /* Comment Form */
+        .comment-form {
+            margin-top: 50px;
+            padding: 30px;
+            background: rgba(40, 40, 40, 0.5);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        
+        .form-control {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-color);
+            padding: 12px 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.25rem rgba(255, 77, 77, 0.25);
+            color: var(--text-color);
+        }
+        
+        .submit-btn {
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            border: none;
+            border-radius: 5px;
+            padding: 12px 30px;
+            color: white;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            cursor: pointer;
+            min-width: 150px;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 77, 77, 0.3);
+        }
+        
+        .loading-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: none;
+        }
+        
+        /* Article Share Buttons */
+        .share-section {
+            display: flex;
+            justify-content: flex-end;
+            margin: 20px 0;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .share-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            color: var(--text-color);
+            padding: 8px 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .share-btn:hover {
+            background: rgba(255, 77, 77, 0.2);
+            transform: translateY(-3px);
+        }
+        
+        .share-btn i {
+            font-size: 1.2rem;
+        }
+        
+        /* Article List */
+        .article-list {
+            max-width: 800px;
+            margin: 0 auto 50px;
+            background: rgba(30, 30, 30, 0.7);
+            border-radius: 10px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        .article-item {
+            padding: 15px 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 5px;
+        }
+        
+        .article-item:last-child {
+            border-bottom: none;
+        }
+        
+        .article-item:hover {
+            background: rgba(255, 77, 77, 0.1);
+            padding-right: 25px;
+            transform: translateX(-5px);
+        }
+        
+        .article-item h3 {
+            margin: 0;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-color);
+            position: relative;
+            padding-right: 20px;
+        }
+        
+        .article-item h3::before {
+            content: "»";
+            position: absolute;
+            right: 0;
+            top: 0;
+            color: var(--primary-color);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .article-item:hover h3::before {
+            opacity: 1;
+        }
+        
+        .article-item .date {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .article-item.active {
+            background: rgba(255, 77, 77, 0.2);
+            border-right: 3px solid var(--primary-color);
+        }
+        
+        /* Footer */
+        footer {
+           
+            padding: 40px 0 20px;
+            text-align: center;
+            position: relative;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            margin-top: 60px;
+        }
+        
+        .footer-social {
+            margin-bottom: 20px;
+        }
+        
+        .footer-social a {
+            display: inline-block;
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            margin: 0 8px;
+            text-align: center;
+            line-height: 45px;
+            color: var(--text-color);
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-social a:hover {
+            background: var(--primary-color);
+            transform: translateY(-5px);
+            border-color: var(--primary-color);
+        }
+        
+        .copyright {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-top: 20px;
+        }
+        
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0 5px 15px rgba(235, 16, 16, 0.4);
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(235, 16, 16, 0.6);
+        }
+        
+        /* Floating Share Buttons */
+        .floating-share {
+            position: fixed;
+            left: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .floating-share.visible {
+            opacity: 1;
+        }
+        
+        .floating-share-btn {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(30, 30, 30, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-color);
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        
+        .floating-share-btn:hover {
+            background: var(--primary-color);
+            transform: translateY(-5px);
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .blog-page {
+                padding: 0 15px;
+            }
+            
+            .blog-article {
+                padding: 30px;
+            }
+            
+            .blog-image {
+                height: 350px;
+            }
+            
+            .floating-share {
+                left: 15px;
+                transform: translateY(-50%) scale(0.9);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .blog-title {
+                font-size: 1.8rem;
+            }
+            
+            .blog-image {
+                height: 300px;
+            }
+            
+            .blog-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .blog-date {
+                margin-top: 10px;
+            }
+            
+            .blog-navigation {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .nav-btn {
+                width: 100%;
+            }
+            
+            .share-section {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            .floating-share {
+                display: none;
+            }
+            
+            /* Adjust back-to-top position on mobile */
+            .back-to-top {
+                bottom: 80px;
+                right: 15px;
+                width: 45px;
+                height: 45px;
+                font-size: 1rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .blog-article {
+                padding: 20px;
+            }
+            
+            .blog-title {
+                font-size: 1.6rem;
+            }
+            
+            .blog-image {
+                height: 250px;
+            }
+            
+            .blog-content {
+                font-size: 1rem;
+            }
+            
+            .article-item h3 {
+                font-size: 1.1rem;
+            }
+            
+            .comment-form {
+                padding: 20px;
+            }
+            
+            .back-to-top {
+                bottom: 70px;
+                right: 10px;
+                width: 40px;
+                height: 40px;
+                font-size: 0.9rem;
+            }
+        }
+        
+        /* Custom Alert Styles */
+        .swal2-popup {
+            background: #1e1e1e !important;
+            color: white !important;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px !important;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5) !important;
+        }
+        
+        .swal2-title, .swal2-content {
+            color: white !important;
+        }
+        
+        .swal2-confirm {
+            background: var(--primary-color) !important;
+            color: white !important;
+            border: none !important;
+            border-radius: 5px !important;
+            padding: 10px 25px !important;
+        }
+        
+        .swal2-image {
+            max-height: 200px;
+            margin: 0 auto 20px;
+        }
+        
+        /* Text Enhancements */
+        .section-title {
+            color: var(--text-color);
+            font-weight: 700;
+            margin-bottom: 30px;
+            position: relative;
+            display: inline-block;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+        }
+        
+        .text-center {
+            text-align: center;
+        }
+        
+        /* Simplified Comment Form */
+        .simplified-comment-form {
+            margin-top: 50px;
+        }
+.back-home-wrapper {
+  text-align: center; /* يخلي المحتوى يمين */
+  margin-top: 40px;
+  padding-right: 20px; /* مسافة بسيطة من اليمين */
+  /* بدون أي حاوية أو قيود عرض */
+}
+
+.back-home-btn {
+  display: inline-block;
+  padding: 12px 30px;
+  font-size: 16px;
+  color: #fff;
+margin: 16px;
+  border-radius: 30px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 4px 15px rgba(255, 77, 77, 0.4);
+  cursor: pointer;
+}
+
+.back-home-btn i {
+  margin-right: 8px;
+}
+
+.back-home-btn:hover {
+  background-color: #e04343;
+  box-shadow: 0 6px 20px rgba(224, 67, 67, 0.6);
+}
+
+.simplified-comment-form input.form-control,
+.simplified-comment-form textarea.form-control {
+  color: white; /* يجعل النص داخل الحقول أبيض */
+  background-color: #222; /* لو تبي خلفية داكنة للحقول */
+  border: 1px solid #555; /* يمكن تحسين الحدود لتناسب الخلفية */
+}
+
+.simplified-comment-form input::placeholder,
+.simplified-comment-form textarea::placeholder {
+  color: #bbb; /* لون النص التمهيدي (placeholder) أفتح لتمييزه */
+}
+
+    </style>
+</head>
+<body>
+    <!-- Decorations -->
+    <div class="circle circle-1"></div>
+    <div class="circle circle-2"></div>
+    
+    <!-- Back to Top Button -->
+    <div class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+    
+    <!-- Floating Share Button (Copy Link Only) -->
+    <div class="floating-share">
+        <div class="floating-share-btn" onclick="shareArticle(document.querySelector('.blog-title').textContent, window.location.hash)">
+            <i class="fas fa-link"></i>
+        </div>
+    </div>
+
+    <!-- Blog Articles Section -->
+<div class="back-home-wrapper">
+  <a href="index.html" class="back-home-btn">
+    <i class="fas fa-arrow-right"></i> العودة للرئيسية
+  </a>
+</div>
+
+    <section>
+        <div class="blog-page">
+            <div class="text-center mb-5">
+                <h1 class="section-title" style="border-bottom: none; padding-bottom: 0; margin-bottom: 20px; position: relative; display: inline-block;">
+                    <span style="background: linear-gradient(45deg, var(--accent-color), var(--primary-color)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">مدونتي الشخصية</span>
+                </h1>
+ <p style="color: var(--text-secondary); max-width: 800px; margin: 20px auto 0; font-size: 1.1rem; line-height: 1.8;">
+    أشارك في مدونتي أحدث الأفكار والتقنيات في مجال التصميم وتطوير الويب، بالإضافة إلى خبراتي الشخصية وأفضل الممارسات التي تعلمتها خلال رحلتي المهنية.
+    <br><br>
+    كما أن هذه المدونة هي مساحتي الخاصة للتعبير عن آرائي بكل حرية، وكتابة ما يجول في خاطري. وأنت، عزيزي القارئ، دائمًا مرحّب بك هنا. يسعدني أن تشاركني رأيك، وتكون جزءًا من هذه الرحلة التي نكبر فيها معًا بالكلمة والفكرة.
+</p>
+
+
+            </div>
+            
+            <!-- Article List -->
+           <!-- Article List -->
+<div class="article-list">
+    <div class="article-item active" data-article="1">
+        <h3>الذكاء الاصطناعي; ثورة غيرت كل شيء</h3>
+        <div class="date"><i class="far fa-calendar-alt"></i>13 قبراير 2025</div>
+    </div>
+    <div class="article-item" data-article="2">
+        <h3>وسائل التواصل; هل تملكها أم تملكك؟</h3>
+        <div class="date"><i class="far fa-calendar-alt"></i> 2 مايو 2023</div>
+    </div>
+   
+</div>
+
+<!-- زر العودة -->
+
+
+            
+            <!-- Article 1 -->
+            <div class="blog-article active" id="article-1">
+                <div class="blog-header">
+                    <h2 class="blog-title">الذكاء الاصطناعي; ثورة غيرت كل شيء</h2>
+                    <div class="blog-date"><i class="far fa-clock"></i> وقت القراءة:  دقيقة واحدة</div>
+                </div>
+                
+                <!-- Share Button (Copy Link Only) -->
+                <div class="share-section">
+                    <div class="share-btn" onclick="shareArticle('أهمية تجربة المستخدم في التصميم الحديث', '#article-1')">
+                        <i class="fas fa-link"></i>
+                        <span>نسخ الرابط</span>
+                    </div>
+                </div>
+                
+                <img src="./assets/img/martin-martz-Wa-3T6d0rBo-unsplash.jpg" alt="أهمية تجربة المستخدم" class="blog-image">
+                
+           <div class="blog-content">
+
+    <p>
+        الذكاء الاصطناعي أثر علينا بشكل كبير، وأصبح وجوده اليوم أمرًا لا غنى عنه.  
+        صرنا نستخدمه في أدق تفاصيل حياتنا اليومية، لدرجة أن البعض حتى في أبسط المواقف—مثل الحديث مع صديق—يلجأ إليه ليقترح له موضوعًا للمحادثة أو جملة مناسبة.
+    </p>
+    
+    <p>
+        برأيي الشخصي، الذكاء الاصطناعي هو ثورة القرن الحادي والعشرين، بل يمكن اعتباره أعظم اختراع غيّر نظرة البشرية للعقل والإنتاج والمعرفة.  
+        لقد أعاد تشكيل طريقة تفكيرنا، وسهّل علينا الوصول إلى المعلومات واتخاذ القرارات بسرعة مذهلة.
+    </p>
+    
+    <p>
+        لكن، ورغم كل هذه الفوائد، لا يمكن تجاهل العواقب.  
+        الاستخدام المفرط له جعل البعض يعتقد أن "عقول" الناس بدأت تتراجع، وأننا لم نعد نفكر أو ننتج كما كنا من قبل.  
+        أصبح الاعتماد عليه في كل شيء يُضعف مهارات التفكير النقدي ويُقلل من الإبداع الذاتي.
+    </p>
+    
+    <p>
+        ولا أخفيكم، حتى أثناء كتابة هذا المقال، استعنت بالذكاء الاصطناعي لمساعدتي في تنسيقه وترتيبه!  
+        وهنا تكمن المفارقة: نحن نكتب عن تأثير الذكاء الاصطناعي، بينما نستخدمه في الوقت ذاته.  
+        ربما الأمر أصبح مخيفًا فعلًا…  
+        صرنا نعتمد عليه في كل شيء، حتى في المهام التي كانت تُظهر مهاراتنا الحقيقية.  
+        أصبح من السهل علينا أن نطلب من "أداة ذكية" أن تنجز العمل بدلًا عنا، مما جعلنا في كثير من الأحيان نتكاسل، أو نقلل من قيمة الجهد البشري.
+    </p>
+
+    <p>
+        الذكاء الاصطناعي ليس عدوًا، بل هو أداة قوية بين أيدينا.  
+        المشكلة لا تكمن فيه، بل في طريقة استخدامنا له. إن عرفنا كيف نوازن بين الاعتماد عليه واستخدام قدراتنا الشخصية، فسيكون معينًا لا بديلًا، ومساعدًا لا مُسيطرًا.  
+        وفي نهاية المطاف، تبقى العقول البشرية هي الأصل، وما صنع هذا الذكاء… إلا الإنسان.
+    </p>
+</div>
+
+                
+                <!-- معلومات الكاتب -->
+                <div class="blog-author">
+                    <div>
+                        <img src="./assets/img/ME.jpg" alt="مشعل قرافي" class="author-img">
+                    </div>
+                    <div class="author-info">
+                        <h4>مشعل قرافي</h4>
+                        <p>مبرمج ومطور مواقع إلكترونية</p>
+                    </div>
+                </div>
+                
+                <!-- Navigation Buttons -->
+                <div class="blog-navigation">
+                    <a href="#" class="nav-btn disabled">
+                        <i class="fas fa-arrow-right"></i>
+                        <div class="btn-text">المقال السابق</div>
+                    </a>
+                    <a href="#" class="nav-btn" onclick="showArticle(2); return false;">
+                        <div class="btn-text">المقال التالي</div>
+                        <i class="fas fa-arrow-left"></i>
+                    </a>
+                </div>
+                
+                <!-- نموذج إرسال التعليق المبسط -->
+                <div class="simplified-comment-form">
+                    <h3 class="section-title" style="font-size: 1.8rem; border-bottom: none; padding-bottom: 10px; margin-bottom: 20px; position: relative;">
+                        <span>شاركني رأيك  ..</span>
+                       
+                    </h3>
+                    <div class="comment-form">
+                        <form class="comment-form-content">
+                            <div class="row">
+                                <div class="col-12">
+                                    <input type="text" class="form-control" placeholder="الاسم" required>
+                                </div>
+                                <div class="col-12 mt-3">
+                                    <textarea class="form-control" rows="5" placeholder="تعليقك" required></textarea>
+                                </div>
+                                <div class="col-12 mt-3">
+                                    <button type="submit" class="submit-btn">
+                                        <i class="fas fa-spinner fa-spin loading-icon"></i>
+                                        <span>إرسال التعليق</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Article 2 -->
+            <div class="blog-article" id="article-2">
+                <div class="blog-header">
+                    <h2 class="blog-title">وسائل التواصل; هل تملكها أم تملكك؟</h2>
+                    <div class="blog-date"><i class="far fa-clock"></i> وقت القراءة:  دقيقة واحدة</div>
+                </div>
+                
+                <!-- Share Button (Copy Link Only) -->
+                <div class="share-section">
+                    <div class="share-btn" onclick="shareArticle('أحدث اتجاهات التصميم لعام 2023', '#article-2')">
+                        <i class="fas fa-link"></i>
+                        <span>نسخ الرابط</span>
+                    </div>
+                </div>
+                
+                <img src="./assets/img/gilles-lambert-pb_lF8VWaPU-unsplash.jpg" alt="اتجاهات التصميم" class="blog-image">
+                <div class="blog-content">
+   
+
+    <p>
+        أصبحت وسائل التواصل الاجتماعي اليوم أقوى سلاح يمتلكه العالم.
+        من لا يتواجد فيها يُنظر إليه وكأنه متخلّف عن الركب، رجعي، لا مكان له بيننا.
+        صرنا نقيس الوجود الرقمي على أنه مقياس للتطور والانفتاح، وغاب عنّا أن التواجد لا يعني الوعي، وأن الضجيج لا يعني الحضور الحقيقي.
+    </p>
+
+    <p>
+        شخصيًا، قررت في فترة من الفترات أن أبتعد عن السوشيال ميديا تمامًا.
+        وفي تلك المدة، كانت الحقيقة صادمة… لكنها جميلة.
+        بدأت أقترب من نفسي أكثر، أستعيد اهتماماتي وهواياتي، أجد وقتًا للهدوء، وأكتشف أشياء عن ذاتي كنت غافلًا عنها وسط زحام الإشعارات والمقارنات المستمرة.
+        شعرت وكأنني أعيش، لا فقط أُشاهد من يعيشون.
+    </p>
+
+    <p>
+        لا أقول إن على الجميع الانسحاب التام، أو أن تصبح "رجعيًا" بالمعنى المتداول، بل أقول ببساطة: لا تجعل حياتك تتمحور حول البرامج والمنصات.
+        لا تجعل آخر ريلز وصلك أو تغريدة شاركها أحدهم تحدد مزاجك أو تأخذ من وقتك أكثر مما تستحق.
+    </p>
+
+    <p>
+        أمسِك العصا من المنتصف.
+        تحكّم في استخدامك، وتعرّف على نفسك خارج الشاشة، بعيدًا عن فلاتر الآخرين.
+    </p>
+
+
+    <p>
+        الحياة الرقمية رائعة حين نستخدمها بوعي، لكنها خطيرة حين تبتلعنا دون أن نشعر.
+        لا تترك منطقك خلفك، ولا تجعل صورتك في السوشيال أهم من حقيقتك.
+        اسأل نفسك دائمًا: من أنا بدون هذه التطبيقات؟
+        وإذا لم تجد إجابة واضحة… فربما حان الوقت لتبدأ بالبحث عنها.
+    </p>
+</div>
+
+                
+                <!-- معلومات الكاتب -->
+              <div class="blog-author">
+                    <div>
+                        <img src="./assets/img/ME.jpg" alt="مشعل قرافي" class="author-img">
+                    </div>
+                    <div class="author-info">
+                        <h4>مشعل قرافي</h4>
+                        <p>مبرمج ومطور مواقع إلكترونية</p>
+                    </div>
+                </div>
+                
+                <!-- Navigation Buttons -->
+                <div class="blog-navigation">
+                    <a href="#" class="nav-btn" onclick="showArticle(1); return false;">
+                        <i class="fas fa-arrow-right"></i>
+                        <div class="btn-text">المقال السابق</div>
+                    </a>
+                    <a href="#" class="nav-btn" onclick="showArticle(3); return false;">
+                        <div class="btn-text">المقال التالي</div>
+                        <i class="fas fa-arrow-left"></i>
+                    </a>
+                </div>
+                
+                <!-- نموذج إرسال التعليق المبسط -->
+                <div class="simplified-comment-form">
+                    <h3 class="section-title" style="font-size: 1.8rem; border-bottom: none; padding-bottom: 10px; margin-bottom: 20px; position: relative;">
+                        <span>شاركنا رأيك</span>
+                        <div style="width: 60px; height: 3px; background: var(--primary-color); position: absolute; bottom: 0; right: 0; border-radius: 2px;"></div>
+                    </h3>
+                    <div class="comment-form">
+                        <form class="comment-form-content">
+                            <div class="row">
+                                <div class="col-12">
+                                    <input type="text" class="form-control" placeholder="الاسم" required>
+                                </div>
+                                <div class="col-12 mt-3">
+                                    <textarea class="form-control" rows="5" placeholder="تعليقك" required></textarea>
+                                </div>
+                                <div class="col-12 mt-3">
+                                    <button type="submit" class="submit-btn">
+                                        <i class="fas fa-spinner fa-spin loading-icon"></i>
+                                        <span>إرسال التعليق</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Article 3 -->
+            <div class="blog-article" id="article-3">
+                <div class="blog-header">
+                    <h2 class="blog-title">تحسين أداء مواقع الويب الحديثة</h2>
+                    <div class="blog-date"><i class="far fa-clock"></i> وقت القراءة: ٨ دقائق</div>
+                </div>
+                
+                <!-- Share Button (Copy Link Only) -->
+                <div class="share-section">
+                    <div class="share-btn" onclick="shareArticle('تحسين أداء مواقع الويب الحديثة', '#article-3')">
+                        <i class="fas fa-link"></i>
+                        <span>نسخ الرابط</span>
+                    </div>
+                </div>
+                
+                <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="تحسين أداء المواقع" class="blog-image">
+                
+                <div class="blog-content">
+                    <p>في عصر السرعة الرقمية، أصبح أداء مواقع الويب عاملاً حاسماً في نجاح أي مشروع على الإنترنت. موقع بطيء التحميل يمكن أن يؤدي إلى ارتفاع معدلات الارتداد وفقدان العملاء. إليك استراتيجيات وتقنيات لتحسين أداء مواقع الويب الحديثة.</p>
+                    
+                    <h3>1. تحسين حجم الصور</h3>
+                    <p>الصور غالبًا ما تكون أكبر العناصر على الصفحة. طرق تحسينها تشمل:</p>
+                    <ul>
+                        <li><strong>الضغط</strong>: استخدام أدوات ضغط الصور دون فقدان الجودة</li>
+                        <li><strong>الصيغ الحديثة</strong>: استخدام صيغ WebP أو AVIF بدلاً من JPEG وPNG</li>
+                        <li><strong>التحميل البطيء (Lazy Loading)</strong>: تحميل الصور فقط عند ظهورها في نافذة العرض</li>
+                        <li><strong>الأبعاد الصحيحة</strong>: استخدام أبعاد مناسبة للشاشة</li>
+                    </ul>
+                    
+                    <h3>2. تقليل ملفات CSS وJavaScript</h3>
+                    <p>يمكن تحسين أداء الموقع بشكل كبير من خلال:</p>
+                    <ul>
+                        <li><strong>التصغير (Minification)</strong>: إزالة المسافات البيضاء والتعليقات</li>
+                        <li><strong>التجميع (Bundling)</strong>: دمج عدة ملفات في ملف واحد</li>
+                        <li><strong>التقسيم (Code Splitting)</strong>: تحميل الأكواد عند الحاجة إليها فقط</li>
+                        <li><strong>إزالة الأكواد غير المستخدمة</strong></li>
+                    </ul>
+                    
+                    <h3>3. الاستفادة من التخزين المؤقت (Caching)</h3>
+                    <p>التخزين المؤقت يقلل من طلبات الشبكة ويعيد تحميل الموارد بسرعة:</p>
+                    <ul>
+                        <li><strong>تخزين المتصفح المؤقت</strong>: استخدام رؤوس HTTP للتحكم في التخزين المؤقت</li>
+                        <li><strong>تخزين الخادم المؤقت</strong>: تخزين صفحات كاملة أو أجزاء منها على الخادم</li>
+                        <li><strong>خدمات تخزين CDN المؤقت</strong>: توزيع المحتوى على شبكة عالمية</li>
+                    </ul>
+                    
+                    <h3>4. تحسين وقت الاستجابة الأولي (TTFB)</h3>
+                    <p>وقت الاستجابة الأولي هو المدة بين طلب المتصفح واستجابة الخادم. تحسينه يشمل:</p>
+                    <ul>
+                        <li>اختيار مضيف ويب ببنية تحتية جيدة</li>
+                        <li>استخدام خوادم قريبة جغرافيًا من المستخدمين</li>
+                        <li>تحسين استعلامات قواعد البيانات</li>
+                        <li>استخدام التخزين المؤقت على مستوى الخادم</li>
+                    </ul>
+                    
+                    <h3>5. التحميل البطيء (Lazy Loading)</h3>
+                    <p>تقنية تسمح بتحميل الموارد فقط عند الحاجة إليها:</p>
+                    <ul>
+                        <li>تحميل الصور عند ظهورها في نافذة العرض</li>
+                        <li>تأجيل تحميل JavaScript غير الضروري</li>
+                        <li>تقسيم الأكواد وتحميلها عند الحاجة</li>
+                    </ul>
+                    
+                    <h3>6. استخدام شبكات توصيل المحتوى (CDN)</h3>
+                    <p>شبكات CDN توزع المحتوى على خوادم حول العالم، مما يسمح بتسليم المحتوى من أقرب موقع جغرافي للمستخدم، مما يحسن سرعة التحميل بشكل كبير.</p>
+                    
+                    <h3>7. تحسين تجربة المستخدم أثناء التحميل</h3>
+                    <p>حتى مع التحسينات، قد يستغرق التحميل بعض الوقت. يمكن تحسين تجربة المستخدم خلال هذا الوقت بـ:</p>
+                    <ul>
+                        <li>عرض مؤشرات تقدم جذابة</li>
+                        <li>تحميل المحتوى الأهم أولاً</li>
+                        <li>استخدام تقنيات التحميل التدريجي</li>
+                        <li>عرض هيكل الصفحة الأساسي أثناء التحميل</li>
+                    </ul>
+                    
+                    <p>تحسين أداء الموقع ليس عملية لمرة واحدة، بل هو رحلة مستمرة من المراقبة والتحسين. المواقع السريعة توفر تجربة مستخدم أفضل، وتحسن محركات البحث، وتزيد من معدلات التحويل، مما يجعلها استثمارًا يستحق العناء لأي مشروع رقمي.</p>
+                </div>
+                
+                <!-- معلومات الكاتب -->
+               <div class="blog-author">
+                    <div>
+                        <img src="./assets/img/ME.jpg" alt="مشعل قرافي" class="author-img">
+                    </div>
+                    <div class="author-info">
+                        <h4>مشعل قرافي</h4>
+                        <p>مبرمج ومطور مواقع إلكترونية</p>
+                    </div>
+                </div>
+                
+                <!-- Navigation Buttons -->
+                <div class="blog-navigation">
+                    <a href="#" class="nav-btn" onclick="showArticle(2); return false;">
+                        <i class="fas fa-arrow-right"></i>
+                        <div class="btn-text">المقال السابق</div>
+                    </a>
+                    <a href="#" class="nav-btn disabled">
+                        <div class="btn-text">المقال التالي</div>
+                        <i class="fas fa-arrow-left"></i>
+                    </a>
+                </div>
+                
+                <!-- نموذج إرسال التعليق المبسط -->
+                <div class="simplified-comment-form">
+                    <h3 class="section-title" style="font-size: 1.8rem; border-bottom: none; padding-bottom: 10px; margin-bottom: 20px; position: relative;">
+                        <span>شاركنا رأيك</span>
+                        <div style="width: 60px; height: 3px; background: var(--primary-color); position: absolute; bottom: 0; right: 0; border-radius: 2px;"></div>
+                    </h3>
+                    <div class="comment-form">
+                        <form class="comment-form-content">
+                            <div class="row">
+                                <div class="col-12">
+                                    <input type="text" class="form-control" placeholder="الاسم" required>
+                                </div>
+                                <div class="col-12 mt-3">
+                                    <textarea class="form-control" rows="5" placeholder="تعليقك" required></textarea>
+                                </div>
+                                <div class="col-12 mt-3">
+                                    <button type="submit" class="submit-btn">
+                                        <i class="fas fa-spinner fa-spin loading-icon"></i>
+                                        <span>إرسال التعليق</span>
+                                    </button>
+                                   
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-social">
+                <a href="https://www.instagram.com/raremeow/"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.linkedin.com/in/meshal-qurafi-598662369?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"><i class="fab fa-linkedin-in"></i></a>
+                
+                
+            </div>
+         <div class="copyright">
+    أعتذر لو خيبت ظنك فيني | مشعل ♡
+</div>
+
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        
+  document.addEventListener('DOMContentLoaded', function() {
+    // Set up article list click events
+    document.querySelectorAll('.article-item').forEach(item => {
+        item.addEventListener('click', function() {
+            const articleId = this.getAttribute('data-article');
+            showArticle(articleId);
+        });
+    });
+
+    // محاولة قراءة المعرف من الرابط سواء ?article= أو #article-
+    const urlParams = new URLSearchParams(window.location.search);
+    let articleId = urlParams.get('article');
+
+    if (!articleId && window.location.hash) {
+        articleId = window.location.hash.replace('#article-', '');
+    }
+
+    // عرض المقال المناسب أو أول مقال
+    if (articleId) {
+        showArticle(articleId);
+    } else {
+        showArticle(1);
+    }
+});
+
+        // Function to show specific article
+        function showArticle(articleId) {
+            // Hide all articles
+            document.querySelectorAll('.blog-article').forEach(article => {
+                article.classList.remove('active');
+            });
+            
+            // Show selected article
+            document.getElementById(`article-${articleId}`).classList.add('active');
+            
+            // Update active state in article list
+            document.querySelectorAll('.article-item').forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('data-article') == articleId) {
+                    item.classList.add('active');
+                }
+            });
+            
+            // Update URL hash
+            window.location.hash = `article-${articleId}`;
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        
+        // Function to share article
+        function shareArticle(title, articleId) {
+            const url = `${window.location.origin}${window.location.pathname}${articleId}`;
+            
+            // Copy URL to clipboard
+            navigator.clipboard.writeText(url).then(() => {
+                Swal.fire({
+                    title: 'تم نسخ الرابط!',
+                    text: 'تم نسخ رابط المقالة بنجاح، يمكنك مشاركته الآن.',
+                    icon: 'success',
+                    confirmButtonText: 'حسنًا',
+                    confirmButtonColor: '#ff4d4d',
+                    background: '#1e1e1e',
+                    color: 'white'
+                });
+            });
+        }
+        
+        // Handle comment form submission
+        document.querySelectorAll('.comment-form-content').forEach(form => {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const submitBtn = this.querySelector('.submit-btn');
+                const submitText = submitBtn.querySelector('span');
+                const loadingIcon = submitBtn.querySelector('.loading-icon');
+                
+                // Show loading icon
+                submitText.textContent = 'جاري الإرسال...';
+                loadingIcon.style.display = 'inline-block';
+                
+                // Simulate form submission
+                setTimeout(() => {
+                    // Hide loading icon
+                    loadingIcon.style.display = 'none';
+                    submitText.textContent = 'تم الإرسال!';
+                    
+                    // Show success message with image
+                    Swal.fire({
+                        title: 'تم بنجاح!',
+                        html: `
+                            <div style="text-align: center;">
+                                <img src="https://cdn.dribbble.com/users/2185205/screenshots/7886140/media/9022b2a8c5f5b5c1f6e6b4c5e6d1b3e6.gif" alt="نجاح" style="width: 200px; height: 150px; margin: 15px auto; border-radius: 10px;">
+                                <p style="color: white; margin-top: 15px;">تم إرسال تعليقك بنجاح، شكراً لمشاركتك رأيك.</p>
+                            </div>
+                        `,
+                        icon: 'success',
+                        confirmButtonText: 'حسنًا',
+                        confirmButtonColor: '#ff4d4d',
+                        background: '#1e1e1e',
+                        color: 'white',
+                        customClass: {
+                            content: 'swal2-white-text'
+                        }
+                    });
+                    
+                    // Reset form and button
+                    setTimeout(() => {
+                        this.reset();
+                        submitText.textContent = 'إرسال التعليق';
+                    }, 2000);
+                }, 2000);
+            });
+        });
+        
+        // Back to top functionality
+        const backToTopBtn = document.querySelector('.back-to-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
+            }
+        });
+        
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+        
+        // Floating share buttons visibility
+        const floatingShare = document.querySelector('.floating-share');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 500) {
+                floatingShare.classList.add('visible');
+            } else {
+                floatingShare.classList.remove('visible');
+            }
+        });
+        
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set up article list click events
+            document.querySelectorAll('.article-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    const articleId = this.getAttribute('data-article');
+                    showArticle(articleId);
+                });
+            });
+            
+            // Check URL hash for article
+            if (window.location.hash) {
+                const articleId = window.location.hash.replace('#article-', '');
+                if (articleId) {
+                    showArticle(articleId);
+                }
+            }
+        });
+    </script>
+</body>
+</html

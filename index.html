@@ -1,0 +1,1559 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سيرتي الذاتية | مصمم ومطور ويب</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts - Tajawal -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap"
+        rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <style>
+        :root {
+            --primary-color: #eb1010;
+            /* لون أحمر */
+            --secondary-color: #e70316;
+            /* لون أحمر داكن */
+            --dark-bg: #121212;
+            /* خلفية داكنة مع تعديل */
+            --card-bg: #1e1e1e;
+            /* بطاقات رمادية داكنة */
+            --text-color: #ffffff;
+            /* نص أبيض */
+            --text-secondary: #b0b0b0;
+            /* نص رمادي */
+            --accent-color: #ff6b6b;
+            /* لمسات حمراء فاتحة */
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-color);
+            overflow-x: hidden;
+            position: relative;
+            line-height: 1.8;
+            background-image:
+                radial-gradient(circle at 10% 20%, rgba(235, 16, 16, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(231, 3, 22, 0.1) 0%, transparent 20%);
+            background-attachment: fixed;
+        }
+
+        /* Decorations */
+        .circle {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--primary-color), transparent);
+            filter: blur(60px);
+            z-index: -1;
+            opacity: 0.2;
+        }
+
+        .circle-1 {
+            width: 400px;
+            height: 400px;
+            top: -100px;
+            right: -100px;
+        }
+
+        .circle-2 {
+            width: 300px;
+            height: 300px;
+            bottom: 50px;
+            left: -50px;
+        }
+
+        /* Header Styles */
+        header {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(rgba(18, 18, 18, 0.9), rgba(18, 18, 18, 0.7));
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .header-content {
+            z-index: 2;
+        }
+
+        .header-title {
+            font-size: 4rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, var(--accent-color), var(--primary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+
+        .header-subtitle {
+            font-size: 1.8rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .social-icons {
+            margin-top: 2rem;
+            margin-bottom: 17px;
+        }
+
+        .social-icons a {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            margin-left: 15px;
+            text-align: center;
+            line-height: 50px;
+            color: var(--text-color);
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            background: var(--primary-color);
+            transform: translateY(-5px);
+            border-color: var(--primary-color);
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            right: 0;
+            left: 0;
+            z-index: 1000;
+            background: rgba(20, 20, 20, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+
+        /* Section Styles */
+        section {
+            padding: 100px 0;
+        }
+
+        .section-title {
+            position: relative;
+            margin-bottom: 50px;
+            font-weight: 800;
+            font-size: 2.5rem;
+            color: var(--text-color);
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            right: 0;
+            width: 80px;
+            height: 4px;
+            
+            border-radius: 2px;
+        }
+
+        /* Projects */
+        .project-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            height: 100%;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(255, 77, 77, 0.2);
+            border-color: rgba(255, 77, 77, 0.2);
+        }
+
+        .project-img {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .project-body {
+            padding: 20px;
+        }
+
+        .project-title {
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--text-color);
+        }
+
+        .project-desc {
+            color: var(--text-secondary);
+            margin-bottom: 15px;
+            min-height: 70px;
+        }
+
+        .project-btn {
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            border: none;
+            border-radius: 5px;
+            padding: 8px 20px;
+            color: white;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .project-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(255, 77, 77, 0.4);
+        }
+
+        .project-btn i {
+            margin-left: 8px;
+        }
+
+        /* Blog */
+        .blog-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            height: 100%;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(255, 77, 77, 0.2);
+            box-shadow: 0 15px 30px rgba(255, 77, 77, 0.1);
+        }
+
+        .blog-img {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .blog-body {
+            padding: 20px;
+        }
+
+        .blog-date {
+            color: var(--primary-color);
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+
+        .blog-title {
+            font-weight: 700;
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+            color: var(--text-color);
+        }
+
+        .blog-desc {
+            color: var(--text-secondary);
+            margin-bottom: 15px;
+            min-height: 70px;
+        }
+
+        .blog-btn {
+            background: rgba(255, 77, 77, 0.1);
+            border: 1px solid var(--primary-color);
+            border-radius: 5px;
+            padding: 8px 20px;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .blog-btn:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .blog-btn i {
+            margin-left: 8px;
+        }
+
+        /* Blog Detail Page */
+        .blog-detail {
+            max-width: 800px;
+            margin: 100px auto;
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+        }
+
+        .blog-detail-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .blog-detail-img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .blog-detail-content {
+            font-size: 1.1rem;
+            line-height: 1.9;
+        }
+
+        .blog-author {
+            display: flex;
+            align-items: center;
+            margin-top: 40px;
+            padding-top: 25px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .author-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-left: 15px;
+            border: 2px solid var(--primary-color);
+        }
+
+        .author-info h4 {
+            margin-bottom: 5px;
+            color: var(--text-color);
+        }
+
+        .author-info p {
+            margin: 0;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .back-btn {
+            background: rgba(255, 77, 77, 0.1);
+            border: 1px solid var(--primary-color);
+            color: var(--text-color);
+            padding: 10px 25px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            margin-top: 30px;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .back-btn:hover {
+            background: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        .back-btn i {
+            margin-right: 8px;
+        }
+
+        /* Contact */
+        .contact-form {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-form::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(235, 16, 16, 0.05) 0%, transparent 70%);
+            z-index: 0;
+        }
+
+        .contact-form>* {
+            position: relative;
+            z-index: 1;
+        }
+
+        .form-control {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-color);
+            padding: 12px 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.25rem rgba(255, 77, 77, 0.25);
+            color: var(--text-color);
+        }
+
+        .contact-info {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+            height: 100%;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-info::before {
+            content: '';
+            position: absolute;
+            bottom: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(235, 16, 16, 0.05) 0%, transparent 70%);
+            z-index: 0;
+        }
+
+        .contact-info>* {
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-item {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 77, 77, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 15px;
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .contact-details h5 {
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
+
+        .contact-details p {
+            margin: 0;
+            color: var(--text-secondary);
+        }
+
+        .submit-btn {
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            border: none;
+            border-radius: 5px;
+            padding: 12px 30px;
+            color: white;
+            font-weight: 700;
+            width: 100%;
+            transition: all 0.3s ease;
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .submit-btn::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, transparent 70%);
+            transform: scale(0);
+            transition: transform 0.5s ease;
+        }
+
+        .submit-btn:hover::after {
+            transform: scale(1);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 77, 77, 0.3);
+        }
+
+        .loading-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: none;
+        }
+
+        /* Footer */
+        footer {
+           
+            padding: 40px 0 20px;
+            text-align: center;
+            position: relative;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .footer-social {
+            margin-bottom: 20px;
+        }
+
+        .footer-social a {
+            display: inline-block;
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            margin: 0 8px;
+            text-align: center;
+            line-height: 45px;
+            color: var(--text-color);
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .footer-social a:hover {
+            background: var(--primary-color);
+            transform: translateY(-5px);
+            border-color: var(--primary-color);
+        }
+
+        .copyright {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-top: 20px;
+        }
+
+        /* Animation Classes */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* تحسينات جديدة لصفحة المقالات */
+        .blog-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin: 40px 0;
+            padding: 20px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-btn {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 77, 77, 0.1);
+            border: 1px solid var(--primary-color);
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            color: var(--text-color);
+            text-decoration: none;
+        }
+
+        .nav-btn:hover {
+            background: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        .nav-btn i {
+            margin: 0 8px;
+        }
+
+        .comment-form {
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .social-sharing {
+            display: flex;
+            justify-content: center;
+            margin: 30px 0;
+            gap: 15px;
+        }
+
+        .share-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .share-btn.facebook {
+            background: #3b5998;
+        }
+
+        .share-btn.twitter {
+            background: #1da1f2;
+        }
+
+        .share-btn.linkedin {
+            background: #0077b5;
+        }
+
+        .share-btn.whatsapp {
+            background: #25d366;
+        }
+
+        .share-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        /* تحسينات المشاريع */
+        .project-gallery {
+            display: flex;
+            overflow-x: auto;
+            gap: 10px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            scrollbar-width: thin;
+            scrollbar-color: var(--primary-color) transparent;
+        }
+
+        .project-gallery img {
+            height: 250px;
+            min-width: 300px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .project-gallery img:hover {
+            transform: scale(1.02);
+            border-color: var(--primary-color);
+        }
+
+        .project-comment-form {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* تحسينات عامة */
+        .content-block {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .header-title {
+                font-size: 3rem;
+            }
+
+            .timeline::after {
+                right: 31px;
+            }
+
+            .timeline-item {
+                width: 100%;
+                padding-right: 70px;
+                padding-left: 25px;
+            }
+
+            .timeline-item:nth-child(even) {
+                left: 0;
+            }
+
+            .timeline-item:nth-child(odd)::after,
+            .timeline-item:nth-child(even)::after {
+                left: 21px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-title {
+                font-size: 2.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .about-img {
+                width: 200px;
+                height: 200px;
+                margin: 0 auto 30px;
+            }
+
+            .navbar-nav {
+                background: rgba(10, 10, 10, 0.9);
+                padding: 20px;
+                border-radius: 10px;
+                margin-top: 10px;
+            }
+
+            .blog-detail {
+                padding: 20px;
+                margin: 20px;
+            }
+
+            .blog-detail-img {
+                height: 250px;
+            }
+
+            .blog-navigation {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .project-gallery img {
+                min-width: 250px;
+                height: 200px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .header-title {
+                font-size: 2rem;
+            }
+
+            .header-subtitle {
+                font-size: 1.4rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .contact-form,
+            .contact-info {
+                padding: 20px;
+            }
+
+            .social-sharing {
+                flex-wrap: wrap;
+            }
+        }
+
+        .academic-section {
+            padding: 80px 0;
+        }
+
+        .sub-section-title {
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            color: var(--text-primary, #fff);
+            border-bottom: 2px solid #ff4d4d;
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        .edu-item {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 77, 77, 0.2);
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .edu-item:hover {
+            transform: translateY(-5px);
+            border-color: #ff4d4d;
+        }
+
+        .edu-date {
+            font-size: 0.9rem;
+            color: #ff4d4d;
+            font-weight: bold;
+        }
+
+        .edu-institute {
+            font-weight: 500;
+            color: var(--text-secondary, #aaa);
+            margin-bottom: 5px;
+        }
+
+        .edu-desc {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: var(--text-secondary, #ccc);
+        }
+        /* لجميع المتصفحات الحديثة */
+#contactForm ::placeholder {
+  color: #fff;
+  opacity: 1; /* لتأكد أن اللون واضح */
+}
+
+/* دعم لبعض المتصفحات القديمة */
+#contactForm :-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: #fff;
+}
+
+#contactForm ::-ms-input-placeholder { /* Microsoft Edge */
+  color: #fff;
+}
+
+    </style>
+</head>
+
+<body>
+
+    <!-- Decorations -->
+    <div class="circle circle-1"></div>
+    <div class="circle circle-2"></div>
+
+    <!-- Header Section -->
+    <header id="home">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-7 header-content order-1 order-lg-0">
+
+                    <div class="about-text">
+                        <h2>مشعل قرافي</h2>
+                        <p>اهلًا! أنا <span class="highlight">مشعل</span>، مهتم بعالم التقنية وأحب أصمّم وأحوّل الأفكار
+                            إلى شيء واقعي ومرتب. التصميم بالنسبة لي مو بس شغل، هو شغف أستمتع فيه وأطور نفسي من خلاله.
+                        </p>
+                        <p>أعتبر نفسي شخص طموح، أحب أتعلم وأتطور بشكل مستمر، وأؤمن إن التغيير الحقيقي دايم يبدأ من الشخص
+                            نفسه.</p>
+                        <p>أحب أتابع الأفلام وقت الفراغ، وأحيانًا أستلهم منها أفكار تساعدني في شغلي أو تطوري الشخصي.</p>
+                        <p>قاعد أشتغل على تطوير مهاراتي أكثر وأكثر، وأسعى أكون جزء من مشاريع تخلّي للتقنية والتصميم
+                            تأثير إيجابي واضح.</p>
+                    </div>
+
+                    <div class="social-icons">
+                        <a href="https://www.instagram.com/raremeow/"><i class="fab fa-instagram"></i></a>
+                        <a
+                            href="https://www.linkedin.com/in/meshal-qurafi-598662369?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"><i
+                                class="fab fa-linkedin-in"></i></a>
+
+                    </div>
+                </div>
+                <div class="col-lg-5 col-12 mb-4 mb-lg-0 order-0 order-lg-1">
+
+                    <!-- Hero illustration space -->
+                    <div style="position: relative; height: 500px; width: 400px; margin: auto;">
+                        <!-- الخلفيات المتداخلة -->
+                        <div
+                            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(45deg, rgba(255,77,77,0.1), rgba(230,57,70,0.1)); border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; border: 1px solid rgba(255,77,77,0.2);">
+                        </div>
+                        <div
+                            style="position: absolute; top: 30px; left: 30px; width: 100%; height: 100%; background: linear-gradient(45deg, rgba(255,77,77,0.05), rgba(230,57,70,0.05)); border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; border: 1px solid rgba(255,77,77,0.1);">
+                        </div>
+
+                        <!-- الصورة الشخصية -->
+                        <!-- الصورة الشخصية -->
+                        <div style="
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+    box-shadow: 0 8px 20px rgba(230,57,70,0.4);
+    border: 4px solid rgba(255,77,77,0.5);
+    overflow: hidden;
+    background: linear-gradient(45deg, #1a1a1a, #2c2c2c);
+">
+                            <img src="./assets/img/ME.jpg" alt="صورتي الشخصية" style="
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    ">
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <section id="academic" class="fade-in academic-section">
+        <div class="container">
+            <h2 class="section-title">الخلفية الأكاديمية</h2>
+
+            <div class="row gy-5">
+                <!-- التعليم -->
+                <div class="col-lg-6">
+                    <h3 class="sub-section-title">المؤهلات التعليمية</h3>
+                    <div class="edu-item">
+                        <span class="edu-date">2022 - 2025</span>
+                        <h4>دبلوم تقنية البرمجة وتطوير الويب</h4>
+                        <p class="edu-institute">الكلية التقنية التطبيقية بينبع</p>
+                        <p class="edu-desc">
+                            اكتسبت معرفة متقدمة في هندسة البرمجيات، قواعد البيانات، تطوير المواقع الإلكترونية، وتطوير
+                            تطبيقات الجوال، مع التركيز على تطبيق المفاهيم العملية في المشاريع الحقيقية.
+                        </p>
+                    </div>
+
+
+                </div>
+
+                <!-- الدورات والمعسكرات -->
+                <div class="row">
+                    <!-- عمود المعسكرات -->
+                    <div class="col-lg-6">
+                        <h3 class="sub-section-title">المعسكرات</h3>
+
+                        <div class="edu-item">
+                            <span class="edu-date">2025</span>
+                            <h4>معسكر تعلم لغة بايثون من الصفر الى الاحتراف</h4>
+                            <p class="edu-institute">منصة يوديمي</p>
+                            <p class="edu-desc">
+                                تعلم أساسيات لغة بايثون، البرمجة الكائنية، التعامل مع البيانات، وأهم المكتبات المستخدمة
+                                في تطوير التطبيقات.
+                            </p>
+                        </div>
+
+                        <div class="edu-item">
+                            <span class="edu-date">2025</span>
+                            <h4>المعسكر التدريبي الشامل لتطوير مواقع الويب</h4>
+                            <p class="edu-institute">منصة يوديمي</p>
+                            <p class="edu-desc">
+                                تدريب عملي مكثف على تقنيات تطوير الويب الحديثة مثل HTML، CSS، JavaScript، وواجهات
+                                المستخدم التفاعلية.
+                            </p>
+                        </div>
+
+                        <div class="edu-item">
+                            <span class="edu-date">2025</span>
+                            <h4>معسكر مايكروسوفت اكسل - من الصفر الى الاحتراف</h4>
+                            <p class="edu-institute">منصة يوديمي</p>
+                            <p class="edu-desc">
+                                تعلم مهارات متقدمة في برنامج Excel، من إدارة البيانات إلى إنشاء الجداول المحورية
+                                والتقارير الاحترافية.
+                            </p>
+                        </div>
+
+                        <div class="edu-item">
+                            <span class="edu-date">2025</span>
+                            <h4>معسكر كيفية استخدام React Native لتصميم تطبيقات الجوال</h4>
+                            <p class="edu-institute">منصة يوديمي</p>
+                            <p class="edu-desc">
+                                تعلم تطوير تطبيقات جوال عابرة للمنصات باستخدام React Native، مع التركيز على تصميم واجهات
+                                جذابة وأداء عالي.
+                            </p>
+                        </div>
+                    </div>
+
+
+                    <!-- عمود الدورات -->
+                    <div class="col-lg-6">
+                        <h3 class="sub-section-title">الدورات</h3>
+                        <div class="edu-item">
+                            <span class="edu-date">2023</span>
+                            <h4>التعرف على تقنية AJAX</h4>
+                            <p class="edu-institute">منصة معارف</p>
+                            <p class="edu-desc">تعلمت أساسيات تقنية AJAX وكيفية استخدامها لتحديث محتوى الصفحات بشكل
+                                ديناميكي دون إعادة تحميلها.</p>
+                        </div>
+
+                        <div class="edu-item">
+                            <span class="edu-date">2022</span>
+                            <h4>كيفية إنشاء تطبيقات ويندوز ستور</h4>
+                            <p class="edu-institute">منصة معارف</p>
+                            <p class="edu-desc">تعلمت أساسيات تطوير تطبيقات ويندوز ستور، أدوات التطوير، وكيفية تصميم
+                                وتجربة التطبيقات بشكل احترافي.</p>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="fade-in">
+        <div class="container">
+            <h2 class="section-title">أحدث المشاريع</h2>
+            <div class="row g-4">
+
+                <div class="col-md-4">
+                    <div class="project-card">
+                        <img src="./assets/img/Zhor.png"
+                            alt="مشروع 1" class="project-img">
+                        <div class="project-body">
+                            <h3 class="project-title">منصة زهور المستقبل</h3>
+                           <p class="project-desc">منصة إلكترونية متكاملة للحضانات تشمل عرض الأنشطة، تسجيل الأطفال، وتواصل سهل مع أولياء الأمور.</p>
+
+                            <button class="project-btn" onclick="showProject(1)"><i class="fas fa-eye"></i> عرض
+                                التفاصيل</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="project-card">
+                        <img src="./assets/img/coop.jpg"
+                            alt="مشروع 2" class="project-img">
+                        <div class="project-body">
+                            <h3 class="project-title">منصة التدريب التعاوني</h3>
+                            <p class="project-desc">منصة إلكترونية لتنظيم التدريب التعاوني في الكلية التقنية التطبيقية بينبع، تتيح للطلاب استعراض الفرص والتقديم عليها، وتمكن الشركات من طرح عروض التدريب، مع نظام متابعة وتقييم شامل.</p>
+
+                            <button class="project-btn" onclick="showProject(2)"><i class="fas fa-eye"></i> عرض
+                                التفاصيل</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="project-card">
+                        <img src="./assets/img/portfolio.png"
+                            alt="مشروع 3" class="project-img">
+                        <div class="project-body">
+  <h3 class="project-title">موقعي الشخصي – ملف الأعمال</h3>
+  <p class="project-desc">
+موقع بورتفوليو شخصي لعرض أعمالي ومهاراتي بأسلوب بسيط ومتجاوب، باستخدام HTML وCSS وJavaScript.
+</p>
+
+  <button class="project-btn" onclick="showProject(4)">
+    <i class="fas fa-eye"></i> عرض التفاصيل
+  </button>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <!-- Blog Section -->
+    <section id="blog" class="fade-in">
+        <div class="container">
+            <h2 class="section-title">أحدث المقالات</h2>
+            <div class="row g-4">
+
+                <!-- المقال 1 -->
+                <div class="col-md-4">
+                    <div class="blog-card">
+                        <img src="./assets/img/martin-martz-Wa-3T6d0rBo-unsplash.jpg"
+                            alt="مقال 1" class="blog-img">
+                        <div class="blog-body">
+                            <div class="blog-date">7 يوليو  2025</div>
+                            <h3 class="blog-title">الذكاء الاصطناعي; ثورة غيرت كل شيء</h3>
+                            <p class="blog-desc">كيف يمكن لتصميم تجربة مستخدم مميزة أن تحدث فرقًا في نجاح المنتج الرقمي.
+                            </p>
+                            <button class="blog-btn" onclick="goToBlog(1)">
+                                <i class="fas fa-book-open"></i> اقرأ المزيد
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- المقال 2 -->
+                <div class="col-md-4">
+                    <div class="blog-card">
+                        <img src="./assets/img/gilles-lambert-pb_lF8VWaPU-unsplash.jpg"
+                            alt="مقال 2" class="blog-img">
+                        <div class="blog-body">
+                            <div class="blog-date">14 مايو 2025</div>
+                            <h3 class="blog-title">وسائل التواصل الاجتماعي; هل تملكها أم تملكك؟</h3>
+                            <p class="blog-desc">استكشاف أحدث الاتجاهات في تصميم الويب والموبايل لهذا العام.</p>
+                            <button class="blog-btn" onclick="goToBlog(2)">
+                                <i class="fas fa-book-open"></i> اقرأ المزيد
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- المقال 3 
+                <div class="col-md-4">
+                    <div class="blog-card">
+                        <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                            alt="مقال 3" class="blog-img">
+                        <div class="blog-body">
+                            <div class="blog-date">10 أبريل 2023</div>
+                            <h3 class="blog-title">تحسين أداء مواقع الويب الحديثة</h3>
+                            <p class="blog-desc">استراتيجيات وتقنيات لتحسين أداء مواقع الويب وتجربة المستخدم.</p>
+                            <button class="blog-btn" onclick="goToBlog(3)">
+                                <i class="fas fa-book-open"></i> اقرأ المزيد
+                            </button>
+                        </div>
+                    </div>
+                </div>-->
+
+            </div>
+        </div>
+    </section>
+<section id="contact" class="fade-in">
+    <div class="container">
+        <h2 class="section-title">تواصل معي</h2>
+
+        <div class="row align-items-center justify-content-center g-5">
+            <!-- ✅ العمود: الصورة -->
+            <div class="col-lg-6 col-12 text-center">
+                <img src="./assets/img/undraw_message-sent_785q.svg" alt="Contact Illustration" class="img-fluid"
+                    style="max-height: 400px;">
+            </div>
+
+            <!-- ✅ العمود: النموذج -->
+            <div class="col-lg-6 col-12">
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="mb-3">
+                            <input type="text" class="form-control" placeholder="الاسم الكامل" required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="email" class="form-control" placeholder="البريد الإلكتروني" required>
+                        </div>
+                        <div class="mb-3">
+                            <textarea class="form-control" rows="5" placeholder="الرسالة" required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-spinner fa-spin loading-icon"></i>
+                            <span>إرسال الرسالة</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- ✅ معلومات التواصل -->
+        <div class="row justify-content-center mt-5">
+            <div class="col-lg-6">
+                <div class="edu-item mb-4">
+                    <span class="edu-date">رقم الجوال</span>
+                    <h4>
+                        <a href="tel:+966549960280" style="color: #fff; text-decoration: none;">0549960280</a>
+                    </h4>
+                </div>
+
+                <div class="edu-item mb-4">
+                    <span class="edu-date">البريد الإلكتروني</span>
+                    <h4>
+                        <a href="mailto:meshalqurafi@email.com" style="color: #fff; text-decoration: none;">meshalqurafi@email.com</a>
+                    </h4>
+                </div>
+
+                <div class="edu-item">
+                    <span class="edu-date">الموقع</span>
+                    <h4>ينبع البحر، السعودية</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+    <!-- Footer -->
+    <footer class="fade-in">
+        <div class="container">
+            <div class="footer-social">
+                <a href="https://www.instagram.com/raremeow/"><i class="fab fa-instagram"></i></a>
+                        <a
+                            href="https://www.linkedin.com/in/meshal-qurafi-598662369?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"><i
+                                class="fab fa-linkedin-in"></i></a>
+
+            </div>
+<div class="copyright">
+    أعتذر لو خيبت ظنك فيني | مشعل ♡
+</div>
+
+
+
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+
+        function goToBlog(id) {
+            window.location.href = `blog.html?article=${id}`;
+        }
+        // Scroll animation
+        document.addEventListener('DOMContentLoaded', function () {
+            const fadeElements = document.querySelectorAll('.fade-in');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+
+            fadeElements.forEach(element => {
+                observer.observe(element);
+            });
+
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 70,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+
+        // Contact form submission
+        document.getElementById('contactForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const submitBtn = this.querySelector('.submit-btn');
+            const submitText = submitBtn.querySelector('span');
+            const loadingIcon = submitBtn.querySelector('.loading-icon');
+
+            // Show loading icon
+            submitText.textContent = 'جاري الإرسال...';
+            loadingIcon.style.display = 'inline-block';
+
+            // Simulate form submission
+            setTimeout(() => {
+                // Hide loading icon
+                loadingIcon.style.display = 'none';
+                submitText.textContent = 'تم الإرسال!';
+
+                // Show success message
+                Swal.fire({
+                    title: 'تم بنجاح!',
+                    text: 'تم إرسال رسالتك بنجاح، سأتواصل معك قريبًا.',
+                    icon: 'success',
+                    confirmButtonText: 'حسنًا',
+                    confirmButtonColor: '#ff4d4d',
+                    background: 'var(--card-bg)',
+                    color: 'var(--text-color)'
+                });
+
+                // Reset form and button
+                setTimeout(() => {
+                    this.reset();
+                    submitText.textContent = 'إرسال الرسالة';
+                }, 2000);
+            }, 2000);
+        });
+
+        // Project modals
+        function showProject(id) {
+            let projectTitle, projectDesc, images, technologies, date;
+
+            switch (id) {
+                case 1:
+                    projectTitle = "منصة زهور المستقبل";
+                    projectDesc = "منصة رقمية ذكية تساعد أولياء الأمور في العثور على الحضانة المثالية لأطفالهم، من خلال استعراض الحضانات المعتمدة والمقارنة بينها حسب الموقع، البرامج التعليمية، والتقييمات.<br><br>توفر المنصة واجهة سهلة الاستخدام، مع إمكانية الحجز المباشر، متابعة أنشطة الطفل، والتواصل مع إدارة الحضانة. كما تحتوي على ملفات تعريفية لكل حضانة تشمل الصور، الأنشطة، الرسوم، والمرافق المتوفرة.";
+
+                    images = [
+    './assets/img/zhor.png',
+    './assets/img/zhor3.png',
+    './assets/img/zhor2.png',
+      './assets/img/zhor5.png',
+    './assets/img/zhor4.png',
+];
+
+                    technologies = ['React', 'Node.js', 'MongoDB', 'Socket.io'];
+                    date = 'يناير 2023';
+                    break;
+                case 2:
+                    projectTitle = "تطبيق إدارة المهام";
+                    projectDesc = "تطبيق ويب متكامل لإدارة المهام الشخصية والفريقية مع ميزات متقدمة مثل التعاون في الوقت الحقيقي، التذكيرات، المرفقات، وتقارير الأداء. تم تطويره باستخدام Vue.js وFirebase.<br><br>يتميز التطبيق بواجهة مستخدم بديهية تتيح للمستخدمين تنظيم مهامهم حسب الأولوية، المشروع، أو الموعد النهائي. كما يتضمن نظامًا للإشعارات والتقارير الأسبوعية التي ترسل للمستخدمين لتقييم أدائهم وتقدمهم في إنجاز المهام.";
+                    images = [
+                        'https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80',
+                        'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80',
+                        'https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80'
+                    ];
+                    technologies = ['Vue.js', 'Firebase', 'Tailwind CSS', 'Chart.js'];
+                    date = 'نوفمبر 2022';
+                    break;
+                case 3:
+                    projectTitle = "متجر إلكتروني للأزياء";
+                    projectDesc = "متجر إلكتروني متكامل للأزياء مع نظام دفع آمن وتوصيل، تم تطويره باستخدام React وNode.js. يحتوي على نظام إدارة محتوى متقدم، توصيات شخصية، تجربة مستخدم محسنة، ولوحة تحكم شاملة لإدارة المتجر.<br><br>تم تصميم المتجر ليكون سريع الاستجابة وسهل التصفح، مع ميزات بحث متقدمة وتصفية المنتجات حسب الفئة، السعر، والعلامة التجارية. كما يتضمن نظامًا للعروض والتخفيضات، ومراجعات العملاء التي تساعد المستخدمين على اتخاذ قرارات الشراء المناسبة.";
+                    images = [
+                        'https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80',
+                        'https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80',
+                        'https://images.unsplash.com/photo-1607082350899-7e105aa886ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80'
+                    ];
+                    technologies = ['React', 'Node.js', 'Express', 'MongoDB', 'Stripe'];
+                    date = 'مارس 2023';
+                    break;
+            }
+
+            let imagesHtml = '';
+            images.forEach(img => {
+                imagesHtml += `<img src="${img}" style="width:100%; border-radius:8px; margin-bottom:10px; border: 1px solid rgba(255,255,255,0.1);">`;
+            });
+
+            let techHtml = '';
+            technologies.forEach(tech => {
+                techHtml += `<span style="display: inline-block; background: rgba(255,77,77,0.1); color: var(--text-color); padding: 5px 12px; border-radius: 20px; margin-left: 8px; margin-bottom: 8px;">${tech}</span>`;
+            });
+
+            Swal.fire({
+                title: projectTitle,
+                html: `
+                     <div class="content-block" dir="rtl">
+                        <div class="project-gallery">
+                            ${images.map(img => `<img src="${img}" alt="${projectTitle}">`).join('')}
+                        </div>
+                        
+                        <div style="text-align:right; margin-bottom:15px;">
+                            <span style="color: var(--text-secondary);"><i class="far fa-calendar-alt"></i> ${date}</span>
+                        </div>
+                        
+                        <p style="text-align:right; font-size:1.1rem; margin-bottom:20px;">${projectDesc}</p>
+                        
+                        <div style="text-align:right; margin-bottom:20px;">
+                            <h5 style="color: var(--text-color); margin-bottom:10px;">التقنيات المستخدمة:</h5>
+                            ${techHtml}
+                        </div>
+                        
+                        
+                `,
+                width: '950px',
+maxWidth: '800px',
+
+                   customClass: {
+        popup: 'custom-swal'
+    },
+                confirmButtonText: 'إغلاق',
+                confirmButtonColor: '#ff4d4d',
+                background: 'var(--dark-bg)',
+                color: 'var(--text-color)',
+                didOpen: () => {
+                    // Handle project comment form submission
+                    const projectCommentForm = document.getElementById('projectCommentForm');
+                    if (projectCommentForm) {
+                        projectCommentForm.addEventListener('submit', function (e) {
+                            e.preventDefault();
+
+                            const submitBtn = this.querySelector('.submit-btn');
+                            const submitText = submitBtn.querySelector('span');
+                            const loadingIcon = submitBtn.querySelector('.loading-icon');
+
+                            // Show loading icon
+                            submitText.textContent = 'جاري الإرسال...';
+                            loadingIcon.style.display = 'inline-block';
+
+                            // Simulate form submission
+                            setTimeout(() => {
+                                // Hide loading icon
+                                loadingIcon.style.display = 'none';
+                                submitText.textContent = 'تم الإرسال!';
+
+                                // Show success message
+                                Swal.fire({
+                                    title: 'تم بنجاح!',
+                                    text: 'تم إرسال تعليقك بنجاح، شكراً لمشاركتك رأيك.',
+                                    icon: 'success',
+                                    confirmButtonText: 'حسنًا',
+                                    confirmButtonColor: '#ff4d4d',
+                                    background: 'var(--card-bg)',
+                                    color: 'var(--text-color)'
+                                });
+
+                                // Reset form and button
+                                setTimeout(() => {
+                                    this.reset();
+                                    submitText.textContent = 'إرسال التعليق';
+                                }, 2000);
+                            }, 2000);
+                        });
+                    }
+                }
+            });
+        }
+
+        // Blog detail functions
+        function showBlog(id) {
+            // Hide all sections
+            document.querySelectorAll('section').forEach(section => {
+                section.style.display = 'none';
+            });
+            document.querySelector('header').style.display = 'none';
+            document.querySelector('footer').style.display = 'none';
+            document.querySelector('.navbar').style.display = 'none';
+
+            // Show blog detail section
+            const blogDetail = document.getElementById('blog-detail');
+            blogDetail.style.display = 'block';
+
+            // Set blog content based on id
+            const blog = blogs.find(blog => blog.id === id);
+            if (!blog) return;
+
+            const blogTitle = document.getElementById('blog-detail-title');
+            const blogDate = document.getElementById('blog-detail-date');
+            const blogImg = document.getElementById('blog-detail-img');
+            const blogContent = document.getElementById('blog-detail-content');
+
+            blogTitle.textContent = blog.title;
+            blogDate.textContent = blog.date;
+            blogImg.src = blog.image;
+            blogContent.innerHTML = blog.content;
+
+            // Set navigation buttons
+            const prevBtn = document.getElementById('prev-blog');
+            const nextBtn = document.getElementById('next-blog');
+
+            const currentIndex = blogs.findIndex(b => b.id === id);
+            const prevBlog = blogs[currentIndex - 1];
+            const nextBlog = blogs[currentIndex + 1];
+
+            if (prevBlog) {
+                prevBtn.style.display = 'flex';
+                prevBtn.onclick = () => showBlog(prevBlog.id);
+            } else {
+                prevBtn.style.display = 'none';
+            }
+
+            if (nextBlog) {
+                nextBtn.style.display = 'flex';
+                nextBtn.onclick = () => showBlog(nextBlog.id);
+            } else {
+                nextBtn.style.display = 'none';
+            }
+
+            // Scroll to top
+            window.scrollTo(0, 0);
+
+            // Handle comment form submission
+            const commentForm = document.getElementById('commentForm');
+            if (commentForm) {
+                commentForm.addEventListener('submit', function (e) {
+                    e.preventDefault();
+
+                    const submitBtn = this.querySelector('.submit-btn');
+                    const submitText = submitBtn.querySelector('span');
+                    const loadingIcon = submitBtn.querySelector('.loading-icon');
+
+                    // Show loading icon
+                    submitText.textContent = 'جاري الإرسال...';
+                    loadingIcon.style.display = 'inline-block';
+
+                    // Simulate form submission
+                    setTimeout(() => {
+                        // Hide loading icon
+                        loadingIcon.style.display = 'none';
+                        submitText.textContent = 'تم الإرسال!';
+
+                        // Show success message
+                        Swal.fire({
+                            title: 'تم بنجاح!',
+                            text: 'تم إرسال تعليقك بنجاح، شكراً لمشاركتك رأيك.',
+                            icon: 'success',
+                            confirmButtonText: 'حسنًا',
+                            confirmButtonColor: '#ff4d4d',
+                            background: 'var(--card-bg)',
+                            color: 'var(--text-color)'
+                        });
+
+                        // Reset form and button
+                        setTimeout(() => {
+                            this.reset();
+                            submitText.textContent = 'إرسال التعليق';
+                        }, 2000);
+                    }, 2000);
+                });
+            }
+        }
+
+        function hideBlogDetail() {
+            // Show all sections
+            document.querySelectorAll('section').forEach(section => {
+                section.style.display = 'block';
+            });
+            document.querySelector('header').style.display = 'flex';
+            document.querySelector('footer').style.display = 'block';
+            document.querySelector('.navbar').style.display = 'block';
+
+            // Hide blog detail section
+            document.getElementById('blog-detail').style.display = 'none';
+
+            // Scroll to blog section
+            document.getElementById('blog').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Navigation active state
+        window.addEventListener('scroll', function () {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            let current = '';
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
